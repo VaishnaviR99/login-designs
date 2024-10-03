@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./QRGen.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- <script type="text/javascript" src="jquery.qrcode.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"
+        integrity="sha512-WiGQZv8WpmQVRUFXZywo7pHIO0G/o3RyiAJZj8YXNN4AV7ReR1RYWVmZJ6y3H06blPcjJmG/sBpOVZjTSFFlzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
+        integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="./qrcode.js"></script>
+
+
+    <title>QR CODE GENERATOR</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="myModal" class="modal">
+
+            <div class="modal-body">
+                <i class="fa-solid fa-xmark close"></i>
+                <div id="qr_container">
+                </div>
+                <!-- <img src="./logo.png" id="logo" width="80px" height="80px" style="z-index: 5;"/> -->
+
+                <div class="printDiv">
+                    <i class="fa-solid fa-file-arrow-down" id="download-btn"></i>
+                    <i class="fa-solid fa-print" id="print-btn"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="listModal" class="modal">
+
+            <div id="listModal-body" class="modal-body">
+                <i class="fa-solid fa-xmark close"></i>
+                <div id="listBody">
+
+                    <h4>User List</h4>
+                    <div id="listContent"></div>
+                    <div id="listOpt">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+                    <form id="addUser" style="display: none;">
+                        <input type="text" placeholder="enter name" name="name" class="newName"  autocomplete="off" />
+                        <input type="text"  placeholder="enter vpa" name="vpa"
+                            class="newVpa"  autocomplete="off" />
+
+                        <button class="addBtn" type="submit">add</button>
+                    </form>
+                    <p class='error-message'></p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <i class="fa-solid fa-list"></i>
+
+
+
+        <h3>QR CODE GENERATOR</h3>
+        <form id="QRgenerator_form">
+            
+            <div class="inputDiv">
+                <label for="nameInput">Name</label>
+                <input type="text" id="nameInput" class="input" name="pn" value="" placeholder="Enter Name"
+                    autocomplete="off" />
+            </div><span id="nameError" class="error"></span>
+            <div class="inputDiv">
+                <label for="emailInput">VPA</label>
+                
+                <input type="text" id="vpaInput" class="input" name="pa" value="" placeholder="Enter VPA here (ex. abc@bank)"
+                    autocomplete="off"  >
+            </div><span id="vpaError" class="error"></span>
+
+
+            <div class="inputDiv">
+                <label for="noteInput">Note</label>
+                <textarea type="text" id="noteInput" class="input" name="tn" rows="2"
+                    placeholder="Add Note"> </textarea>
+
+            </div>
+            <div class="rememberDiv">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+
+
+
+            <p id="addMore">
+                Add More
+            </p>
+
+            <div class="addMoreSec" style="display: none;">
+                <div class="amountDiv">
+                    <input type="number" id="amountInput" class="amountInput" name="am" value=""
+                        placeholder="Enter amount " />
+                    <select name="currency" id="currency">
+                        <option value="USD">USD</option>
+                        <option value="GBP">GBP</option>
+                        <option value="YEN">YEN</option>
+                    </select>
+
+                </div>
+
+
+
+                <div class="refDiv">
+
+                    <input type="text" id="RefInput" class="refInput" name="am" value="" placeholder="Ref No"
+                        readonly />
+                    <button type="button" class="refBtn">Get</button>
+                </div>
+
+            </div>
+
+
+            <button type="submit" id="generateQR">GENERATE</button>
+        </form>
+
+
+    </div>
+    <section>
+
+        <h3>about us?</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis sunt, sapiente impedit aliquid nesciunt
+            voluptate dolore! Veniam, dolor vitae. Ad repellat beatae magnam aliquam eaque optio nihil at natus
+            reprehenderit.</p>
+
+        <h3>why to use this service?</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis eveniet repellat nostrum temporibus asperiores
+            animi! Nam illum numquam modi quis praesentium vero, at voluptate ullam ea dolore, similique iste suscipit.
+        </p>
+
+
+    </section>
+
+    <script src="./QRgen.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+        integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>B2b | Log In</title>
+    <!-- <base href="https://www.b2b-its.com/dev/"> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content="B2b-its Administrative Login Page" />
+
+    <!-- <link rel="preload" href="https://www.b2b-its.com/dev/assets/nexa/css/login.css?v_date=20231127" as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
+    <noscript> </noscript>
+
+    <link rel="stylesheet" href="./assets/styles/index.css" />
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Fonteawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body class="light">
+    <!-- Theme toggler  -->
+    <div class="theme-toggle">
+      <button id="theme-toggle-btn">
+        <span id="selected-theme">
+         <i class="fa-solid fa-circle-half-stroke"></i>
+        </span>
+      </button>
+      <div id="theme-options" class="dropdown hidden">
+        <button data-theme="auto">
+          Auto <i class="fa-solid fa-circle-half-stroke"></i>
+        </button>
+        <button data-theme="light">
+          Light <i class="fa-solid fa-sun"></i>
+        </button>
+        <button data-theme="dark">Dark <i class="fa-solid fa-moon"></i></button>
+      </div>
+    </div>
+
+    <div class="login-container">
+      <form
+        action="https://www.b2b-its.com/dev/index.php/auth/login"
+        method="post"
+        accept-charset="utf-8"
+      >
+        <h1>Login</h1>
+        <div class="wrap-input">
+          <input
+            type="text"
+            id="login"
+            name="login"
+            value=""
+            placeholder="User Name"
+            autofocus
+          />
+          <span class="focus-input"></span>
+          <div class="input-error"></div>
+        </div>
+        <div class="wrap-input">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+          <span class="focus-input"></span>
+          <div class="input-error"></div>
+        </div>
+        <label class="checkbox">
+          <input type="checkbox" id="remember" name="remember" value="1" />
+          <div class="switch"></div>
+          <span class="label">Remember me</span>
+        </label>
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    $(document).ready(function () {
+      const themeToggleBtn = $("#theme-toggle-btn");
+      const themeOptions = $("#theme-options");
+      const themeButtons = themeOptions.find("button");
+      const selectedTheme = $("#selected-theme");
+      const body = $("body");
+
+      function setTheme(theme) {
+        switch (theme) {
+          case "auto":
+            body.removeClass("light dark");
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+              body.addClass("dark");
+            } else {
+              body.addClass("light");
+            }
+            selectedTheme.html(
+              '<i class="fa-solid fa-circle-half-stroke"></i>'
+            );
+            break;
+          case "light":
+            body.removeClass("dark");
+            body.addClass("light");
+            selectedTheme.html('<i class="fa-solid fa-sun"></i>');
+            break;
+          case "dark":
+            body.removeClass("light");
+            body.addClass("dark");
+            selectedTheme.html('<i class="fa-solid fa-moon"></i>');
+            break;
+        }
+      }
+
+      const storedTheme = localStorage.getItem("theme");
+
+      // Apply initial theme
+      if (storedTheme) {
+        setTheme(storedTheme);
+        themeButtons.removeClass("selected");
+        themeButtons
+          .filter(`[data-theme="${storedTheme}"]`)
+          .addClass("selected");
+      } else {
+        setTheme("auto");
+        themeButtons.removeClass("selected");
+        themeButtons.filter('[data-theme="auto"]').addClass("selected");
+      }
+
+      // Toggle dropdown visibility
+      themeToggleBtn.click(function (e) {
+        e.stopPropagation();
+        themeOptions.toggleClass("hidden");
+      });
+
+      // Handle theme changes from dropdown buttons
+      themeButtons.click(function () {
+        const selectedTheme = $(this).data("theme");
+        setTheme(selectedTheme);
+        localStorage.setItem("theme", selectedTheme);
+        themeButtons.removeClass("selected");
+        $(this).addClass("selected");
+        themeOptions.addClass("hidden");
+      });
+
+      // Close dropdown when clicking outside
+      $(document).click(function (event) {
+        if (
+          !themeToggleBtn.is(event.target) &&
+          !themeOptions.is(event.target) &&
+          !themeOptions.has(event.target).length
+        ) {
+          themeOptions.addClass("hidden");
+        }
+      });
+    });
+  </script>
+</html>

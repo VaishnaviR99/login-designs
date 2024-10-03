@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="./Login.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <div id="alert-container"></div>
+
+    <div class="container">
+
+
+        <form id="login_form" class="loginForm"  action="https://dev.soloboss.net/vpbx_login.php" method="post">
+
+            <h1>LOGIN</h1>
+
+            <div  id="userinputdiv" class="inputdiv">
+
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="username" name="username" value="" class="input"  placeholder="Username" 
+                     required />
+
+            </div>
+            <p class="usernamehelper">
+
+            </p>
+
+            <div class="inputdiv" id="passinputdiv">
+
+                <i class="fa-regular fa-eye"></i>
+                <input type="password" id="password" class="input"   name="password" value="" placeholder="Password" 
+                 required />
+
+            </div>
+            <p class="passhelper">
+
+            </p>
+
+            <div class="inputdiv" id="accinputdiv">
+
+                <i class="fa-regular fa-address-book"></i>
+                <input type="text"  id="accountName"  name="account_name" value="" class="input"
+                    placeholder="Account Name" required />
+
+            </div>
+            <p class="accounthelper">
+
+            </p>
+
+            <div class="rememberme">
+                <input type="checkbox" id="checkbox" name="remember_me" />
+                <label for="checkbox">Remember me</label>
+            </div>
+
+            <div class="btndiv">
+                <a href="#">Forgot account?</a>
+                <button type="submit"> Login <i class="fa-solid fa-spinner fa-spin-pulse"></i></button>
+            </div>
+
+
+
+        </form>
+
+
+    </div>
+
+    <script src="./Login.js"></script>
+</body>
+
+</html>

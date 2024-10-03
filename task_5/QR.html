@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | QRCode generator</title>
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="./assets/styles/QR.css">
+
+    <!-- vendors -->
+
+    <!-- QR Code js  -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-js-package@1.0.4/qrcode.min.js"></script>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Fonteawesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+    <!-- jquery-ui -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
+        integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Download js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"
+        integrity="sha512-WiGQZv8WpmQVRUFXZywo7pHIO0G/o3RyiAJZj8YXNN4AV7ReR1RYWVmZJ6y3H06blPcjJmG/sBpOVZjTSFFlzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</head>
+
+<body data-theme="light">
+
+    <button class="listView"><i class="fa-solid fa-list"></i></button>
+    <!-- <label class="switch">
+        <input type="checkbox" id="themeSwitcher" data-theme-toggle/>
+        <span class="slider"></span>
+    </label> -->
+
+    <!-- Main Container starts here -->
+
+    <main class="container">
+
+        <!-- QR Code modal -->
+
+        <div id="myModal" class="qrModal">
+
+            <div class="modal-body">
+                <i class="fa-solid fa-xmark close"></i>
+                <div id="qr_container">
+                </div>
+                <!-- <img src="./logo.png" id="logo" width="80px" height="80px" style="z-index: 5;"/> -->
+
+                <div class="printDiv">
+                    <div class="downld" id="download-btn"><i class="fa-solid fa-file-arrow-down"></i>
+                        <p>Download</p>
+                    </div>
+                    <div class="print" id="print-btn"><i class="fa-solid fa-print"></i>
+                        <p>Print QR</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- User List Modal -->
+
+        <div id="listModal" class="modal">
+            <i class="fa-solid fa-xmark close "></i>
+
+            <div class="listModalTitle">
+                <h2>User List</h2>
+                <hr />
+            </div>
+
+            <div id="listModal-body">
+
+                <div id="listContent">
+
+                </div>
+                <div class="listBox">
+                    <div id="listOpt">
+                        <i class="fa-solid fa-user-plus "></i>
+                        <i class="fa-solid fa-trash "></i>
+                    </div>
+
+                    <form id="addUser" style="display: none;">
+
+                        <input type="text" placeholder="Enter name" name="name" class="newName" autocomplete="off" />
+                        <input type="text" placeholder="Enter vpa" name="vpa" class="newVpa" autocomplete="off" />
+
+                        <button class="addBtn" type="submit">Add</button>
+                    </form>
+                    <p class='error-message'></p>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QR Code Form -->
+        <form id="QRgenerator_form">
+            <h1 class="heading">QR CODE</h1>
+            <div class="inputDiv">
+                <i class="fa-regular fa-user "></i>
+                <input type="text" id="nameInput" class="input" name="pn" value="" placeholder="Enter Name"
+                    autocomplete="off" />
+            </div><span id="nameError" class="error"></span>
+
+            <div class="inputDiv">
+
+                <i class="fa-regular fa-credit-card "></i>
+                <input type="text" id="vpaInput" class="input" name="pa" value=""
+                    placeholder="Enter VPA here (ex. abc@bank)" autocomplete="off">
+            </div><span id="vpaError" class="error"></span>
+
+
+            <div class="inputDiv">
+                <i class="fa-regular fa-note-sticky "></i>
+                <textarea type="text" id="noteInput" class="input" name="tn" rows="1"
+                    placeholder="Add Note"> </textarea>
+
+            </div>
+            <div class="rememberDiv">
+                <label for="rememberMe" class="checkbox-label">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" class="checkbox">
+                    Save</label>
+
+            </div>
+
+
+
+            <div id="addMore">
+
+
+                <div class="addMoreSec">
+
+
+                    <div class="amountDiv">
+                        <input type="number" id="amountInput" class="amountInput" name="am" value=""
+                            placeholder="Enter amount " autocomplete="off" />
+                        <select name="currency" id="currency">
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="YEN">YEN</option>
+                        </select>
+
+                    </div>
+
+                    <div class="refDiv">
+
+                        <input type="text" id="RefInput" class="refInput" name="am" value="" placeholder="Ref No"
+                            readonly />
+
+                        <span type="button" class="refBtn"><i class="fa-solid fa-rotate " class="refBtn"></i></span>
+                    </div>
+                    <i class="fa-solid fa-arrow-left" id="closeaddMore"></i>
+
+
+                </div>
+                <i class="fa-solid fa-arrow-right" id="addMoreBtn"></i>
+
+            </div>
+
+
+
+
+            <button type="submit" id="generateQR">GENERATE <i class="fa-solid fa-spinner fa-spin-pulse fa-lg"
+                    style="display: none;"></i></button>
+        </form>
+    </main>
+
+    <!-- Main Content End here -->
+
+    <!-- about us article -->
+
+    <article>
+
+        <h1>About Us</h1>
+        <div class="line"></div>
+        <div class="subArticle">
+            <div class="article1">
+                <p class="content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis sunt, sapiente
+                    impedit
+                    aliquid nesciunt
+                    voluptate dolore! Veniam, dolor vitae. Ad repellat beatae magnam aliquam eaque optio nihil at natus
+                    reprehenderit Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <div></div>
+            </div>
+
+            <h1>Why to use this service?</h1>
+            <div class="line"></div>
+            <div class="article2">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod beatae modi veritatis, autem dicta
+                    animi,
+                    asperiores reprehenderit, doloribus deleniti repudiandae totam? Error fuga quibusdam quis. Et enim
+                    accusantium nemo labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, quae
+                    quos
+                    nulla quisquam eius facere cupiditate fuga odit officia quasi quo tenetur expedita vero enim?
+                    Aliquid
+                    dolorum est voluptatum fuga.</p>
+
+            </div>
+        </div>
+
+
+<!--  footer-->
+
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 QR Code Generator.</p>
+            <hr />
+        </div>
+    </footer>
+
+
+
+    </article>
+
+  
+</body>
+
+<script src="./assets/script/QR.js"></script>
+
+<!-- jquery ui script  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+    integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</html>

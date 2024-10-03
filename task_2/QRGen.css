@@ -1,0 +1,511 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#QRgenerator_form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  gap: 1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: 2px solid rgb(106, 201, 12);
+  transition: 0.2s ease-in-out;
+}
+
+.input:hover {
+  transform: scale(1.05);
+}
+
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  resize: vertical;
+}
+
+.rememberDiv {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: last baseline;
+  margin-top: -0.5rem;
+  margin-bottom: -0.5rem;
+}
+
+.error {
+  color: red;
+  margin-top: -1rem;
+  font-size: small;
+}
+#QRgenerator_form button[type="submit"] {
+  background-color: rgb(159, 251, 70);
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: large;
+  font-weight: bold;
+  border: white;
+  position: relative;
+}
+
+#QRgenerator_form button[type="submit"]:hover {
+  background-color: rgb(112, 201, 23);
+  cursor: pointer;
+  color: white;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 2rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.fa-list {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  font-size: large;
+}
+
+.fa-list:hover {
+  color: rgb(106, 201, 12);
+  background-color: rgba(90, 87, 87, 0.2);
+}
+
+.fa-user-plus:hover {
+  color: blue;
+  transform: scale(1.3);
+}
+.fa-trash:hover {
+  color: red;
+  transform: scale(1.3);
+}
+.error-message {
+  color: red;
+  align-self: center;
+  font-size: small;
+  width: 85%;
+}
+
+.modal-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 80%;
+  width: 80%;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 1rem;
+}
+
+#listBody {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 2rem;
+}
+
+#addUser {
+  /* visibility: hidden; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2px;
+}
+#addUser input {
+  width: 40%;
+  border: 1px solid gray;
+  overflow-x: hidden;
+  padding: 0 2px;
+}
+#addUser button {
+  padding: 0.3rem;
+  background-color: rgb(159, 251, 70);
+  border-radius: 5px;
+  font-weight: bold;
+  border: white;
+}
+
+#qr_container {
+  margin-top: 2rem;
+}
+.printDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+  color: rgb(49, 49, 49);
+  font-size: x-large;
+}
+.printDiv i {
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+.printDiv i:hover {
+  color: blue;
+  background-color: rgba(90, 87, 87, 0.2);
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.editing {
+  transform: scale(1.03);
+  background-color: rgb(106, 160, 51);
+}
+#listOpt {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+#listOpt i {
+  font-size: small;
+  color: #2b2727;
+}
+#listBody {
+  width: 90%;
+}
+
+#listContent {
+  height: 65%;
+  width: 100%;
+  padding: 2px;
+  overflow-y: auto;
+}
+.user-entry {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  margin-bottom: 2px;
+  border: 1px solid gray;
+  padding: 2px;
+}
+.user-entry p {
+  width: 40%;
+  overflow-x: hidden;
+  transition: overflow-x 0.2s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: rgba(110, 104, 104, 0.2);
+  padding: 1px;
+}
+.user-entry p:hover {
+  overflow-x: auto;
+}
+
+.fa-pen-to-square:hover {
+  color: green;
+  transform: scale(1.1);
+}
+.deleteUser:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+section {
+  width: 80%;
+  margin: auto;
+  gap: 1rem;
+}
+#addMore {
+  color: black;
+  font-size: small;
+  font-weight: bold;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.2rem 0.2rem;
+  margin-bottom: -0.5rem;
+}
+#addMore:hover {
+  color: green;
+}
+.addMoreSec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgb(106, 201, 12);
+}
+.amountDiv {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid green;
+  border-radius: 0.5rem;
+}
+.amountInput {
+  width: 70%;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+.amountInput,
+#currency:focus {
+  outline: none;
+}
+.amountDiv:focus-within {
+  border: 2px solid orange;
+}
+
+#currency {
+  border: none;
+  width: 30%;
+  border-radius: 0.5rem;
+}
+
+.refDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.refBtn {
+  width: 20%;
+  border-radius: 0.5rem;
+  background-color: rgb(159, 251, 70);
+  padding: 2px;
+  border: none;
+  cursor: pointer;
+}
+.refBtn:hover {
+  background-color: rgb(86, 153, 18);
+}
+
+#RefInput {
+  width: 85%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid green;
+}
+section p {
+  margin-bottom: 1rem;
+}
+
+/* Media query for desktop screens */
+
+@media screen and (min-width: 768px) {
+  #QRgenerator_form {
+    width: 30%;
+  }
+  .container h3 {
+    top: 10%;
+    font-size: 1rem;
+  }
+  #addMore {
+    width: 35%;
+    padding: 0.2rem 0.2rem;
+    border-radius: 0.5rem;
+  }
+
+  .amountInput {
+    width: 70%;
+    padding: 0.5rem;
+    /* padding: 0rem 0.5rem; */
+    border-radius: 0.5rem;
+  }
+  .refBtn {
+    width: 20%;
+    border-radius: 0.5rem;
+    background-color: rgb(112, 201, 23);
+  }
+  #RefInput {
+    width: 70%;
+    padding: 0.5rem;
+    /* padding: 0rem 0.5rem; */
+    border-radius: 0.5rem;
+  }
+
+  .fa-list {
+    top: 3rem;
+    right: 3rem;
+    font-size: larger;
+  }
+
+  #listBody {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  #QRgenerator_form {
+    width: 60%;
+    padding: 2rem;
+  }
+}
+
+/* Media system theme preference */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: rgb(34, 33, 33);
+    color: #efefef;
+  }
+
+  #QRgenerator_form button[type="submit"] {
+    background-color: rgb(106, 160, 51);
+  }
+  #QRgenerator_form {
+    background-color: rgb(48, 46, 46);
+  }
+
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    color: gray;
+    background-color: transparent;
+    border: 2px solid rgb(12, 82, 12);
+  }
+  .input:focus {
+    border: 2px solid gray;
+    background-color: rgba(178, 243, 113, 0.2);
+    font-size: medium;
+    color: white;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    color: gray;
+    background-color: transparent;
+    border: 2px solid rgb(12, 82, 12);
+  }
+  textarea:focus {
+    border: 2px solid gray;
+    background-color: rgba(178, 243, 113, 0.2);
+    font-size: medium;
+    color: white;
+  }
+
+  button .fa-solid {
+    position: absolute;
+    right: 20%;
+    color: white;
+    font-size: 1.5rem;
+    visibility: hidden;
+  }
+
+  .modal-body {
+    background-color: #f5efef;
+    height: 90%;
+  }
+
+  #addMore {
+    color: rgb(155, 150, 150);
+  }
+
+  .addMoreSec {
+    border: 2px solid rgb(12, 82, 12);
+  }
+
+  .amountInput {
+    background-color: rgba(178, 243, 113, 0.2);
+    color: white;
+    font-size: medium;
+    width: 70%;
+    border-radius: 0;
+    border: none;
+  }
+
+  .amountDiv {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid green;
+    border-radius: 0.5rem;
+  }
+
+  .amountDiv:focus-within {
+    border: 2px solid gray;
+  }
+
+  #currency {
+    border: none;
+    border-radius: 0;
+    background-color: rgba(178, 243, 113, 0.2);
+    color: rgb(155, 150, 150);
+    border: none;
+  }
+
+  .refBtn {
+    width: 30%;
+    border-radius: 0.5rem;
+    background-color: rgb(106, 160, 51);
+    border: none;
+    cursor: pointer;
+  }
+  .refBtn:hover {
+    background-color: rgb(86, 153, 18);
+  }
+
+  #RefInput {
+    border-radius: 0.5rem;
+    background-color: rgba(178, 243, 113, 0.2);
+    color: white;
+    border: 2px solid rgb(12, 82, 12);
+  }
+
+  section p {
+    color: rgb(155, 150, 150);
+  }
+
+  #listBody h4 {
+    color: black;
+    font-size: larger;
+  }
+  .user-entry p,
+  .user-entry i {
+    color: black;
+  }
+}

@@ -1,0 +1,894 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url("../media/bg.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* top left view user list button */
+
+.listView {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: transparent;
+  border: none;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+.listView i {
+  font-size: large;
+  color: white;
+}
+.listView:hover {
+  background-color: rgba(180, 199, 180, 0.2);
+}
+/* main content container */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*  QR code generator form*/
+#QRgenerator_form {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.inputDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid beige;
+  border-radius: 1rem;
+}
+
+.inputDiv:focus-within {
+  border: 2px solid yellowgreen;
+  background-color: rgba(61, 32, 49, 0.4);
+  box-shadow: 6px 6px 3px yellowgreen;
+}
+.input {
+  border: none;
+  width: 100%;
+  padding: 0.7rem;
+  background-color: transparent;
+  font-size: medium;
+  color: white;
+}
+.input:focus {
+  outline: none;
+}
+.inputDiv i {
+  color: #ffff;
+  margin-left: 0.3rem;
+  border-right: 2px dotted white;
+  padding: 0.7rem;
+  border-radius: 50%;
+}
+
+.ui-menu-item {
+  background-color: #252323;
+  color: yellowgreen;
+}
+
+.error {
+  color: rgb(175, 22, 24);
+  margin-top: -0.5rem;
+  font-size: medium;
+}
+
+/* input icons  */
+.fa-flipp {
+  animation: flip-in 1s ease-in-out forwards;
+}
+
+.fa-flipp:hover {
+  animation: flip 0.7s alternate ease-in-out infinite;
+}
+
+/* generate QR code big button */
+#generateQR {
+  cursor: pointer;
+  background-color: rgb(109, 201, 11);
+  color: white;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  font-size: large;
+  font-weight: bold;
+  border: none;
+  position: relative;
+  border: 4px solid rgb(109, 201, 11);
+}
+
+#generateQR:hover {
+  box-shadow: 0 0 0.8rem 0.1rem rgb(109, 201, 11);
+  background-color: rgb(120, 224, 9);
+}
+
+/* intially hidden input tags., addmorediv */
+#addMore {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#addMore .fa-rotate:hover {
+  color: green;
+  transform: scale(1.1);
+}
+
+.addMoreSec {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(4, 12, 8, 0.7);
+  position: relative;
+  right: 110%;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+  box-shadow: rgba(139, 196, 131, 0.35) 0px 5px 15px;
+}
+.addMoreSec:hover {
+  box-shadow: rgba(139, 196, 131, 0.35) 15px 5px 15px;
+}
+
+.addMoreSec.active {
+  right: 0;
+  height: auto;
+}
+
+#addMoreBtn {
+  position: absolute;
+ /* top: 50%; */
+  left: 50%;
+  transform: translate(-50%);
+  text-align: center;
+  font-size: large;
+  padding: 1rem;
+  color: rgb(84, 151, 16);
+  cursor: pointer;
+  border: 2px solid rgb(88, 153, 23);
+  border-radius: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+#closeaddMore {
+  position: absolute;
+  text-align: center;
+  left: -1.5rem;
+  top: 40%;
+  font-size: large;
+  display: inline-block;
+  height: 2rem;
+  padding: 0.5rem;
+  color: rgb(84, 151, 16);
+  cursor: pointer;
+  border: 2px solid rgb(88, 153, 23);
+  border-radius: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+#addMoreBtn:hover,
+#closeaddMore:hover {
+  color: white;
+  background-color: rgba(109, 201, 11, 0.8);
+  border: none;
+  transform: scale(1.1);
+}
+
+/* add more section input box */
+.amountDiv {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid green;
+  border-radius: 0.5rem;
+  width: 100%;
+  align-items: center;
+  border-radius: 1rem;
+}
+.amountInput {
+  width: 70%;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: transparent;
+  font-size: medium;
+  color: white;
+}
+.amountInput,
+#currency:focus {
+  outline: none;
+}
+.amountDiv:focus-within {
+  border: 2px solid white;
+  box-shadow: 3px 3px 2px #aaaaaa;
+}
+
+#currency {
+  border: none;
+  width: 37%;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  background-color: transparent;
+  font-size: medium;
+  color: white;
+}
+
+.amountDiv option {
+  background-color: rgba(4, 12, 8, 0.7);
+  color: rgb(13, 212, 6);
+}
+
+.refDiv {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid green;
+  border-radius: 0.5rem;
+  width: 100%;
+  align-items: center;
+  border-radius: 1rem;
+}
+.refDiv:focus-within {
+  border: 2px solid white;
+  box-shadow: 3px 3px 2px #aaaaaa;
+}
+
+.refDiv i {
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  font-size: medium;
+  color: white;
+  border-left: 1px dotted white;
+}
+
+#RefInput {
+  width: 90%;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: medium;
+  color: white;
+}
+
+/* Remember me input */
+
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 2px;
+  color: #e8e9e9;
+}
+
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: relative;
+  display: inline-block;
+  width: 2rem;
+  height: 1.2rem;
+  background-color: #726c6c;
+  border-radius: 50px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.slider:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: white;
+  transition: left 0.5s ease-in-out;
+}
+
+#rememberMe:checked + .slider {
+  background-color: #0ae754;
+}
+
+#rememberMe:checked + .slider:after {
+  left: calc(100% - 1rem);
+}
+
+#rememberMe:focus + .slider {
+  box-shadow: 0 0 1px #0dcf4e;
+}
+
+/*  */
+
+/* abous us section */
+article {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.content {
+  display: none;
+  padding: 0.5rem;
+  background-color: rgb(45, 44, 44);
+  border-top: 1px dashed black;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(45, 44, 44);
+  justify-content: space-between;
+  color: rgb(225, 248, 255);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.open-close {
+  font-size: large;
+}
+.title:hover {
+  background-color: rgb(63, 59, 59);
+}
+
+/* LIST MODAL */
+#listModal {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(27, 26, 26);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #aaaaaa;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #fefefe;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#listModal h4 {
+  color: rgb(225, 248, 255);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 0.5rem;
+}
+.listModalTitle {
+  padding: 0 2rem;
+  margin-bottom: 0.2rem;
+  margin-top: -2rem;
+}
+#listModal hr {
+  opacity: 0.5;
+  border-top: 1px solid #c4c5c7;
+}
+
+#listModal-body {
+  /* border: 1px solid red; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 98%;
+  width: 90%;
+  margin: auto;
+  padding: 0.2rem;
+  padding-bottom: 0;
+}
+
+
+
+#listContent {
+   
+  margin: 0;
+  height: 70%;
+  width: 100%;
+  padding: 2px;
+  /* overflow-y: auto; */
+}
+
+.listBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 25%;
+  width: 100%;
+}
+
+#listOpt {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+#listOpt .fa-user-plus {
+  font-size: large;
+  color: rgba(136, 204, 33);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  background-color: rgba(135, 212, 20, 0.2);
+  transition: all 0.4s ease-in-out;
+}
+#listOpt .fa-trash {
+  font-size: large;
+  color: rgb(164, 26, 28);
+  border-radius: 3px;
+  padding: 0.2rem 0.7rem;
+  background-color: rgb(42, 24, 28);
+  transition: all 0.4s ease-in-out;
+}
+
+#listOpt .fa-user-plus:hover {
+  background-color: rgb(28, 175, 23);
+  transform: scale(1.1);
+  color: rgb(225, 248, 255);
+}
+#listOpt .fa-trash:hover {
+  color: rgb(225, 248, 255);
+  background-color: rgb(199, 37, 58);
+  transform: scale(1.1);
+}
+
+.user-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.6rem 0.4rem;
+  gap: 0.3rem;
+  background-color: #111;
+  margin-bottom: 0.3rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.5s ease-out;
+}
+
+.user-entry:hover {
+  background-color: #494040;
+}
+.user-entry p {
+   /* border: 1px solid red; */
+  color: rgb(225, 248, 255);
+  width: 42%;
+ padding: 0.5rem 0.2rem;
+  overflow-x: hidden;
+  text-align: justify;
+}
+
+.user-entry .fa-pen-to-square {
+  padding: 0.5rem;
+  color: rgb(189, 134, 253);
+  background-color: rgba(189, 134, 253, 0.2);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+.user-entry .deleteUser {
+  padding: 2px;
+  color: #fe4130;
+  font-size: large;
+  transition: all 0.3s ease-in-out;
+}
+
+.fa-pen-to-square:hover {
+  color: rgb(232, 233, 233);
+  transform: scale(1.1);
+  background-color: rgba(178, 126, 238, 0.6);
+}
+.deleteUser:hover {
+  color: rgb(170, 45, 45);
+  transform: scale(1.3);
+}
+.editing {
+  transform: scale(1.01);
+ background-color: #494040;
+}
+#addUser {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3px;
+}
+#addUser input {
+  width: 40%;
+  border: 1px solid gray;
+  overflow-x: hidden;
+  padding: 0.3rem;
+  color: #e8e9e9;
+  background-color: transparent;
+  border-radius: 5px;
+}
+#addUser input:focus {
+  box-shadow: 1px 1px 10px grey;
+}
+#addUser button {
+  padding: 0.4rem;
+  background-color: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  color: rgb(89, 143, 36);
+  border: 1px solid rgb(89, 143, 36);
+  transition: background-color 0.1s ease-in-out;
+}
+#addUser button:hover {
+  background-color: rgba(139, 224, 54, 0.3);
+  color: #e8e9e9;
+  box-shadow: 1px 1px 5px green;
+}
+.error-message {
+  color: rgb(254, 84, 53);
+  align-self: center;
+  font-size: small;
+  width: 85%;
+}
+
+/*  */
+
+/* QR Modal */
+
+.qrModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 2rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: all 0.5s ease-in-out;
+  animation: fadeIn 0.4s;
+}
+.modal-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 80%;
+  width: 80%;
+  background-color: #2b292a;
+  margin: auto;
+  padding: 1rem;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+.modal-body .close:hover {
+  color: #eee9e9;
+}
+
+#qr_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #504949;
+  margin-top: -0.5rem;
+}
+.printDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  color: rgb(49, 49, 49);
+  font-size: x-large;
+}
+.printDiv div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e8e9e9;
+  gap: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.downld i,
+.downld p {
+  color: rgba(136, 204, 33);
+  font-size: medium;
+}
+
+.print i,
+.print p {
+  color: #edf3f3;
+  font-size: medium;
+}
+.print {
+  background-color: rgba(136, 204, 33);
+  opacity: 0.8;
+  font-size: medium;
+}
+
+.print:hover {
+  opacity: 1;
+  background-color: rgba(136, 204, 33);
+  transform: scale(1.05);
+}
+.downld:hover {
+  background-color: #1b1818;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  margin-bottom: 2rem;
+  margin-top: 5rem;
+}
+
+footer .footer-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.footer-content p {
+  color: #242323;
+  margin-bottom: 1rem;
+  font-size: larger;
+}
+
+.footer-content hr {
+  width: 40%;
+  border-top: 1px solid #272424;
+}
+
+/*  */
+
+/* input icon flip animation */
+@keyframes flip-in {
+  from {
+    transform: rotateY(360deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+/*   */
+
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*  media query for desktop screens */
+
+@media screen and (min-width: 768px) {
+  #QRgenerator_form {
+    width: 40%;
+  }
+  .listView {
+    top: 1rem;
+    left: 2rem;
+  }
+  .listView i {
+    font-size: larger;
+  }
+  .addMoreSec {
+    visibility: hidden;
+    right: 180%;
+  }
+  .addMoreSec.active {
+    visibility: visible;
+  }
+  #closeaddMore {
+    left: -2.5rem;
+  }
+
+  .amountInput {
+    width: 80%;
+  }
+
+  #currency {
+    width: 30%;
+  }
+
+  .printDiv {
+    justify-content: space-around;
+  }
+
+  #listModal h4 {
+    font-size: larger;
+  }
+
+  .user-entry {
+    padding: 0.6rem 0.5rem;
+    gap: 0.8rem;
+  }
+
+  .user-entry p {
+    padding: 0.5rem 1rem;
+    font-size: large;
+  }
+
+  #listContent {
+    width: 80%;
+  }
+
+  #addUser {
+    padding: 0 7rem;
+    gap: 5px;
+  }
+  #addUser input {
+    font-size: medium;
+  }
+  #addUser input:focus {
+    box-shadow: 1px 1px 5px grey;
+    border: 2px solid grey;
+    outline: none;
+  }
+  article {
+    padding: 0 8rem;
+  }
+  .article p {
+    font-size: large;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  #QRgenerator_form {
+    width: 60%;
+    padding: 2rem;
+  }
+  .addMoreSec {
+    right: 150%;
+  }
+  .addMoreSec.active {
+    visibility: visible;
+  }
+  #closeaddMore {
+    left: -2.2rem;
+  }
+
+  .printDiv {
+    justify-content: space-around;
+  }
+
+  #listModal h4 {
+    font-size: large;
+  }
+
+  .user-entry {
+    padding: 0.6rem 0.6rem;
+    gap: 0.8rem;
+  }
+
+  .user-entry p {
+    font-size: large;
+  }
+
+  #addUser {
+    padding: 0 2rem;
+    gap: 5px;
+  }
+  #addUser input {
+    font-size: medium;
+  }
+  #addUser input:focus {
+    box-shadow: 1px 1px 5px grey;
+    border: 2px solid grey;
+    outline: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: url("../media/bg2.jpg");
+
+    /* filter: blur(5px);
+  -webkit-filter: blur(5px); */
+  }
+  .inputDiv {
+    border: 2px solid rgb(225, 248, 255);
+  }
+
+
+
+  /* Footer */
+  footer {
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+  }
+
+  footer .footer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-content p {
+    color: #ccc;
+    margin-bottom: 1rem;
+    font-size: larger;
+  }
+
+  .footer-content hr {
+    width: 40%;
+    border-top: 1px solid #ccc;
+  }
+
+
+  @media screen and (max-width: 576px) {
+#addMoreBtn {
+  color: white;
+  border: 2px solid white;
+}
+
+#closeaddMore {
+  color: white;
+  border: 2px solid white;
+}
+  }
+  /*  */
+}
